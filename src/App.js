@@ -6,15 +6,17 @@ import Footer from "./components/Footer";
 import PageNotFound from "./components/PageNotFound";
 function App() {
   return (
-    <div className="App">
+    <div className="flex w-screen h-screen flex-col bg-primary">
       <Router>
         <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/movie/:imdbid" element={<MovieDetails />} />
-          {/* any route which is not defined can be written as "*" */}
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
+        <div className="flex w-full h-full p-2 bg-">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movie/:imdbid" element={<MovieDetails />} />
+            {/* any route which is not defined can be written as "*" */}
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </div>
         <Footer />
       </Router>
     </div>

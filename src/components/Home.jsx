@@ -3,18 +3,21 @@ import MovieListing from "../components/MovieListing";
 import { APIKEY } from "../apis/MovieApiKey";
 import movieApi from "../apis/movieApi";
 import { useDispatch } from "react-redux";
-import { addMovies } from "../features/movies/movieSlice";
+import { getMovies } from "../features/movies/movieSlice";
 const Home = () => {
   let movieText = "horror";
   const dispatch = useDispatch();
   const getMovies = async () => {
-    let res = await movieApi
-      .get(`?apikey=${APIKEY}&s=${movieText}&type=movie`)
-      .catch((err) => {
-        console.log("error:", err);
-      });
+    try {
+      let res = await movieApi.get(
+        `?apikey=${APIKEY}&s=${movieText}&type=movie`
+      );
 
-    dispatch(addMovies(res.data));
+      dispatch(getMovies(res.data));
+      console.log(res.data);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   useEffect(() => {
